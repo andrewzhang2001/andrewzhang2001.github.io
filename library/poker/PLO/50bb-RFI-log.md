@@ -1,6 +1,9 @@
 ---
 layout: default
-title: 50bb RFI Session Log — PLO
+title: 50bb RFI Log
+parent: PLO
+grand_parent: Poker
+nav_order: 2
 ---
 
 # 50bb RFI Session Log

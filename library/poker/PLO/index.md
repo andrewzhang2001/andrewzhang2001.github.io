@@ -1,13 +1,79 @@
 ---
 layout: default
 title: PLO
+parent: Poker
+grand_parent: Library
+nav_order: 1
+has_children: true
 ---
 
 # Pot-Limit Omaha
 
-## Topics
+<div class="topic-grid">
+  <a href="/library/poker/PLO/50bb-RFI-adjustments" class="topic-card">
+    <span class="topic-icon">&#128203;</span>
+    <span class="topic-title">50bb RFI Adjustments</span>
+    <span class="topic-desc">Polished takeaways on short-stack opens</span>
+  </a>
+  <a href="/library/poker/PLO/50bb-RFI-log" class="topic-card">
+    <span class="topic-icon">&#128221;</span>
+    <span class="topic-title">50bb RFI Log</span>
+    <span class="topic-desc">Running session notes</span>
+  </a>
+  <a href="/library/poker/PLO/100bb-RFI-adjustments" class="topic-card">
+    <span class="topic-icon">&#128203;</span>
+    <span class="topic-title">100bb RFI Adjustments</span>
+    <span class="topic-desc">Polished takeaways on full-stack opens</span>
+  </a>
+  <a href="/library/poker/PLO/100bb-RFI-log" class="topic-card">
+    <span class="topic-icon">&#128221;</span>
+    <span class="topic-title">100bb RFI Log</span>
+    <span class="topic-desc">Running log of session mistakes</span>
+  </a>
+</div>
 
-- [50bb RFI Adjustments](50bb-RFI-adjustments) — Polished takeaways on short-stack open raising
-- [50bb RFI Session Log](50bb-RFI-log) — Running notes from study sessions
-- [100bb RFI Adjustments](100bb-RFI-adjustments) — Polished takeaways on full-stack open raising
-- [100bb RFI Session Log](100bb-RFI-log) — Running log of session mistakes
+<style>
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--border-color, #e1e4e8);
+  border-radius: 8px;
+  text-decoration: none !important;
+  color: var(--body-text-color, #c9d1d9) !important;
+  background: var(--feedback-color, rgba(255,255,255,0.04));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-align: center;
+}
+
+.topic-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-color: var(--link-color, #7253ed);
+}
+
+.topic-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.topic-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.topic-desc {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+</style>

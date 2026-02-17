@@ -1,6 +1,9 @@
 ---
 layout: default
-title: 50bb RFI Adjustments — PLO
+title: 50bb RFI Adjustments
+parent: PLO
+grand_parent: Poker
+nav_order: 1
 ---
 
 # 50bb RFI Adjustments

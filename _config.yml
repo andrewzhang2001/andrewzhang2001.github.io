@@ -1,1 +1,20 @@
-theme: jekyll-theme-time-machine
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+
+title: Andrew Zhang
+description: Personal knowledge library
+
+color_scheme: dark
+
+search_enabled: true
+heading_anchors: true
+
+back_to_top: true
+back_to_top_text: "Back to top"
+
+aux_links:
+  "GitHub":
+    - "https://github.com/andrewzhang2001"
+aux_links_new_tab: true
