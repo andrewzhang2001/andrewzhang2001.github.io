@@ -1,26 +1,22 @@
 ---
 layout: default
-title: Library
+title: PC Builds
+parent: Library
 nav_order: 2
 has_children: true
 has_toc: false
 ---
 
-# Library
+# PC Builds
 
-A collection of deep dives and notes on topics I'm studying.
+Research and decision-making for my PC build.
 {: .fs-6 .fw-300 }
 
 <div class="topic-grid">
-  <a href="/library/poker/" class="topic-card">
-    <span class="topic-icon">&#9824;</span>
-    <span class="topic-title">Poker</span>
-    <span class="topic-desc">PLO strategy, RFI ranges, session logs</span>
-  </a>
-  <a href="/library/pc-builds/" class="topic-card">
-    <span class="topic-icon">&#128187;</span>
-    <span class="topic-title">PC Builds</span>
-    <span class="topic-desc">Monitors, GPUs, CPUs, and build planning</span>
+  <a href="/library/pc-builds/monitors/" class="topic-card">
+    <span class="topic-icon">&#128424;</span>
+    <span class="topic-title">Monitors</span>
+    <span class="topic-desc">Resolution, refresh rate, panel types, dual-monitor setup</span>
   </a>
 </div>
 
