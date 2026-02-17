@@ -3,6 +3,7 @@ layout: default
 title: Library
 nav_order: 2
 has_children: true
+has_toc: false
 ---
 
 # Library
@@ -15,6 +16,11 @@ A collection of deep dives and notes on topics I'm studying.
     <span class="topic-icon">&#9824;</span>
     <span class="topic-title">Poker</span>
     <span class="topic-desc">PLO strategy, RFI ranges, session logs</span>
+  </a>
+  <a href="/library/pc-builds/" class="topic-card">
+    <span class="topic-icon">&#128187;</span>
+    <span class="topic-title">PC Builds</span>
+    <span class="topic-desc">Monitors, GPUs, CPUs, and build planning</span>
   </a>
 </div>
 

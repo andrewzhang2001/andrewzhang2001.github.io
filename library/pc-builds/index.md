@@ -1,19 +1,22 @@
 ---
 layout: default
-title: Poker
+title: PC Builds
 parent: Library
-nav_order: 1
+nav_order: 2
 has_children: true
 has_toc: false
 ---
 
-# Poker
+# PC Builds
+
+Research and decision-making for my PC build.
+{: .fs-6 .fw-300 }
 
 <div class="topic-grid">
-  <a href="/library/poker/PLO/" class="topic-card">
-    <span class="topic-icon">&#127183;</span>
-    <span class="topic-title">Pot-Limit Omaha</span>
-    <span class="topic-desc">RFI ranges, positional adjustments, session logs</span>
+  <a href="/library/pc-builds/monitors/" class="topic-card">
+    <span class="topic-icon">&#128424;</span>
+    <span class="topic-title">Monitors</span>
+    <span class="topic-desc">Resolution, refresh rate, panel types, dual-monitor setup</span>
   </a>
 </div>
 
