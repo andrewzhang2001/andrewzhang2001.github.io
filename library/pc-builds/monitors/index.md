@@ -124,12 +124,34 @@ What my Dell S2722QC uses. The most common type.
 
 | Pros | Cons |
 |:-----|:-----|
-| Perfect blacks (infinite contrast) — each pixel turns off individually | **Burn-in risk** — static elements (taskbar, code editor UI) can permanently mark the screen |
-| Best response times (near-instant) | Most expensive |
-| Stunning HDR (real HDR, not the fake HDR on my Dell) | Lower peak brightness in full-screen white |
+| Perfect blacks (infinite contrast) — each pixel turns off individually | Most expensive (~$800+ for 27" QD-OLED) |
+| Best response times (near-instant) | Lower peak brightness in full-screen white |
+| Stunning HDR (real HDR, not the fake HDR on my Dell) | Burn-in risk exists but is manageable (see below) |
 | Best motion clarity for gaming |  |
 
-**Best for:** Gaming and media consumption. The burn-in risk makes it a tough sell as a coding monitor, but newer QD-OLED panels are improving on this with better heat dissipation and pixel shifting.
+**Best for:** Gaming and media consumption. Also viable for light daily coding use — see burn-in section below.
+
+#### OLED burn-in: how bad is it really?
+
+**At ~3 hours/day of mixed use, burn-in is basically a non-issue with modern panels.** Here's the data:
+
+The most rigorous independent test (Monitors Unboxed) ran a Gen 3 QD-OLED for **5,000+ hours at ~60 hrs/week** of heavy static productivity use — Windows light mode, dual-window layout, dark taskbar. Burn-in artifacts appeared between months 3-6 but were **only visible on diagnostic grey test patterns**, not in normal content. After 6 months, degradation plateaued and barely changed through month 21. Overall brightness dropped just 2%.
+
+At 3 hrs/day, I'd accumulate 5,000 hours in **~4.5 years** — and my usage would be more varied than a worst-case static test. Gen 4 "Penta Tandem" QD-OLED (2025+) claims **2x lifespan** over those Gen 3 panels.
+
+**Built-in mitigations on modern OLED monitors:**
+- Pixel shifting — moves the image by a few pixels every ~3 minutes to spread wear
+- Auto brightness limiter — reduces brightness when large areas are bright
+- Panel refresh — compensates for voltage drift when monitor powers off
+- Static element detection — auto-dims persistent UI elements (taskbar, logos)
+
+**Simple precautions that go a long way:**
+- Use dark mode in IDE and OS (less pixel stress)
+- Auto-hide the taskbar (single biggest mitigation according to reviewers)
+- Keep brightness moderate (~50-60% for SDR content)
+- Let panel refresh run when powering off (takes ~1 hour)
+
+**Warranty:** ASUS, MSI, Dell/Alienware, Corsair, Gigabyte, and AOC all offer **3-year burn-in warranty** on OLED monitors. They wouldn't do that if they expected claims.
 
 ### Mini-LED (LCD backlight upgrade)
 
@@ -146,7 +168,7 @@ Not a panel type itself — it's an upgrade to the backlight behind an IPS or VA
 ### My thinking so far
 
 {: .note }
-Still undecided. IPS is the safe/affordable choice and pairs naturally with my Dell. OLED is tempting for gaming but the burn-in risk for coding is a real concern. Need to research more on how much QD-OLED has improved on burn-in.
+Still undecided on panel type, but OLED is more viable than expected. At ~3 hrs/day, burn-in is essentially a non-issue with modern QD-OLED panels and basic precautions (dark mode, auto-hide taskbar). The real question is whether the jump to ~$800+ for OLED is worth it vs ~$230-250 for IPS. That's a 3x price difference for a secondary gaming monitor.
 
 ---
 
@@ -259,6 +281,6 @@ All 27", 1440p, 144Hz+, flat, with USB-C. Prices as of early 2026.
 
 - [ ] **GPU budget:** Resolution and refresh rate decisions depend on what GPU I can afford. Need to research GPUs next.
 - [ ] **Do I actually need USB-C on the gaming monitor?** If the Dell stays as my work/MacBook monitor, the gaming monitor just needs DisplayPort for the PC.
-- [ ] **OLED worth the premium?** 27" OLED options are emerging (e.g., ASUS ROG PG27AQDP) at ~$800+. Is the jump in quality worth 3x the price of the Dell S2725DC?
+- [ ] **OLED worth the premium?** Burn-in is not a concern at my usage level, so the question is purely about value. Is ~$800+ for a 27" QD-OLED worth 3x the price of the Dell S2725DC at ~$250? Need to compare picture quality in person if possible.
 - [ ] **Horizon Forbidden West at 1440p vs 4K:** How much visual difference is there? If 1440p looks good enough, it massively simplifies the GPU decision.
 - [ ] **Monitor arm vs stands:** Two monitors on stands takes up a lot of desk space. A dual monitor arm might be worth it.
