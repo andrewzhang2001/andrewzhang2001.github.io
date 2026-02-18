@@ -124,7 +124,7 @@ What my Dell S2722QC uses. The most common type.
 
 | Pros | Cons |
 |:-----|:-----|
-| Perfect blacks (infinite contrast) — each pixel turns off individually | Most expensive (~$800+ for 27" QD-OLED) |
+| Perfect blacks (infinite contrast) — each pixel turns off individually | More expensive than IPS (~$350-500 for 27" QD-OLED) |
 | Best response times (near-instant) | Lower peak brightness in full-screen white |
 | Stunning HDR (real HDR, not the fake HDR on my Dell) | Burn-in risk exists but is manageable (see below) |
 | Best motion clarity for gaming |  |
@@ -168,7 +168,7 @@ Not a panel type itself — it's an upgrade to the backlight behind an IPS or VA
 ### My thinking so far
 
 {: .note }
-Still undecided on panel type, but OLED is more viable than expected. At ~3 hrs/day, burn-in is essentially a non-issue with modern QD-OLED panels and basic precautions (dark mode, auto-hide taskbar). The real question is whether the jump to ~$800+ for OLED is worth it vs ~$230-250 for IPS. That's a 3x price difference for a secondary gaming monitor.
+OLED is looking very strong. Burn-in is a non-issue at ~3 hrs/day. And the price gap has collapsed — QD-OLED starts at ~$350, only ~$100 more than the best IPS options. For a gaming-focused monitor, OLED's infinite contrast, instant response times, and real HDR are a big upgrade for a small premium.
 
 ---
 
@@ -229,58 +229,116 @@ How many times per second the screen updates. Higher = smoother motion.
 
 ## Monitors I'm considering
 
-All 27", 1440p, 144Hz+, flat, with USB-C. Prices as of early 2026.
+All 27", 1440p, flat. Prices as of February 2026.
 
-### Dell S2725DC — ~$230-250
+Since the Dell S2722QC stays as the work/MacBook monitor, the gaming monitor doesn't necessarily need USB-C — it just needs DisplayPort for the PC. This opens up the OLED options.
+
+### IPS options
+
+#### Dell S2725DC — ~$230-250
 
 | Spec | Value |
 |:-----|:------|
-| Resolution | 2560 x 1440 |
-| Refresh rate | 144 Hz |
 | Panel | IPS |
+| Refresh rate | 144 Hz |
 | USB-C | 65W PD + DP Alt Mode + secondary 15W USB-C |
 | Contrast | 1500:1 |
+| Color | 99% sRGB |
 | Features | KVM switch, same Dell design language as my S2722QC |
 
-**Why it's interesting:** Same brand, similar aesthetics to my Dell, matching 65W USB-C, KVM support for switching between work laptop and PC. Probably the most natural companion to my existing monitor. Great value.
+**Why it's interesting:** Same brand, similar aesthetics to my Dell, matching 65W USB-C, KVM support. Probably the most natural companion to my existing monitor. Best value overall.
 
-### ASUS ROG Strix XG27ACS — ~$255-270
+#### ASUS ROG Strix XG27ACS — ~$255-270
 
 | Spec | Value |
 |:-----|:------|
-| Resolution | 2560 x 1440 |
-| Refresh rate | 180 Hz |
 | Panel | Fast IPS |
+| Refresh rate | 180 Hz |
 | USB-C | DP Alt Mode only (**7.5W — won't charge a laptop**) |
 | Contrast | 1000:1 |
-| Color | 97% DCI-P3 (much wider color gamut) |
+| Color | 97% DCI-P3 (much wider gamut) |
 | Features | HDR400, G-SYNC Compatible, ELMB Sync |
 
-**Why it's interesting:** Best color gamut and highest refresh rate in this price range. Better for gaming than the Dell. **But: USB-C won't charge my MacBook** — I'd need a separate charger. That might be fine if the Dell is my "work" monitor.
+**Why it's interesting:** Best color gamut and highest refresh rate in the IPS price range. Better for gaming than the Dell.
 
-### Gigabyte M27Q — ~$250-320
+### QD-OLED options
+
+OLED monitor prices have dropped ~70% since 2022. Sub-$400 QD-OLED is real.
+
+#### Samsung Odyssey OLED G5 (G50SF) — ~$350
 
 | Spec | Value |
 |:-----|:------|
-| Resolution | 2560 x 1440 |
-| Refresh rate | 170-180 Hz |
-| Panel | IPS |
-| USB-C | DP Alt Mode + 18W PD + KVM |
-| Contrast | 1000:1 |
-| Color | 92% DCI-P3 |
-| Features | Built-in KVM switch, DisplayHDR 400 |
+| Panel | QD-OLED |
+| Refresh rate | 180 Hz |
+| Ports | 1x DisplayPort 1.4, 1x HDMI 2.0 (**no USB-C**) |
+| Contrast | Infinite (OLED) |
+| Color | Wide gamut |
+| HDR | HDR True Black 400 |
+| Stand | Tilt-only (no height/swivel/pivot) |
 
-**Why it's interesting:** Built-in KVM for switching between machines. Wide color gamut. USB-C PD is only 18W though — won't charge a MacBook Pro at full speed.
+**Why it's interesting:** Cheapest QD-OLED on the market. Only ~$100 more than the Dell IPS. The catch: minimal connectivity, no speakers, and a basic tilt-only stand (would want a monitor arm). But the image quality leap from IPS to OLED is massive — perfect blacks, instant response times, real HDR.
+
+#### AOC Q27GAZD — ~$360
+
+| Spec | Value |
+|:-----|:------|
+| Panel | QD-OLED |
+| Refresh rate | 240 Hz |
+| Ports | 1x DisplayPort 1.4, 1x HDMI 2.1 |
+| Contrast | Infinite (OLED) |
+| Color | Wide gamut |
+| HDR | HDR True Black 400 |
+
+**Why it's interesting:** 240Hz for only $10 more than the Samsung. Minimal ports like the Samsung but includes HDMI 2.1. Arguably the best value OLED right now.
+
+#### Acer Predator X27U Z1 — ~$380
+
+| Spec | Value |
+|:-----|:------|
+| Panel | QD-OLED |
+| Refresh rate | 280 Hz |
+| Ports | DisplayPort 1.4, HDMI 2.1 |
+| Contrast | Infinite (OLED) |
+| HDR | HDR True Black 400 |
+| Features | FreeSync Premium Pro |
+
+**Why it's interesting:** 280Hz for $380. Good middle ground between the stripped-down Samsung and the pricier options.
+
+#### Alienware AW2725DF — ~$500
+
+| Spec | Value |
+|:-----|:------|
+| Panel | QD-OLED |
+| Refresh rate | 360 Hz |
+| Ports | 2x DisplayPort 1.4, 1x HDMI 2.1 |
+| Contrast | Infinite (OLED) |
+| HDR | DisplayHDR True Black 400 |
+| Stand | Full ergonomic (height, tilt, swivel, pivot) |
+| Warranty | **3-year burn-in warranty** |
+
+**Why it's interesting:** Premium build, 360Hz, full ergonomic stand, and Dell/Alienware's 3-year burn-in warranty. The "no compromises" OLED pick, but at $500 it's double the Dell IPS.
+
+### Price comparison
+
+| Monitor | Panel | Refresh | Price | vs Dell IPS |
+|:--------|:------|:--------|:------|:------------|
+| Dell S2725DC | IPS | 144Hz | $230-250 | baseline |
+| ASUS XG27ACS | IPS | 180Hz | $255-270 | +$25 |
+| Samsung G50SF | QD-OLED | 180Hz | $350 | **+$100** |
+| AOC Q27GAZD | QD-OLED | 240Hz | $360 | **+$110** |
+| Acer X27U Z1 | QD-OLED | 280Hz | $380 | **+$130** |
+| Alienware AW2725DF | QD-OLED | 360Hz | $500 | +$250 |
 
 {: .note }
-**Early lean: Dell S2725DC.** Cleanest pairing with my existing Dell, proper 65W USB-C, KVM support, and the best price. The ASUS has better gaming specs (180Hz, wider color) but can't charge my laptop — and since the Dell S2722QC is my work monitor anyway, the gaming monitor doesn't need USB-C charging.
+**The OLED premium is only ~$100-130, not $500+ like I originally thought.** The Samsung G50SF or AOC Q27GAZD at $350-360 deliver a huge jump in image quality (infinite contrast, instant response, real HDR) for roughly the price of a nice dinner out. The main tradeoff is fewer ports and a worse stand — both solvable with a monitor arm. This changes the calculus significantly.
 
 ---
 
 ## Open questions
 
 - [ ] **GPU budget:** Resolution and refresh rate decisions depend on what GPU I can afford. Need to research GPUs next.
-- [ ] **Do I actually need USB-C on the gaming monitor?** If the Dell stays as my work/MacBook monitor, the gaming monitor just needs DisplayPort for the PC.
-- [ ] **OLED worth the premium?** Burn-in is not a concern at my usage level, so the question is purely about value. Is ~$800+ for a 27" QD-OLED worth 3x the price of the Dell S2725DC at ~$250? Need to compare picture quality in person if possible.
+- [x] **Do I actually need USB-C on the gaming monitor?** No — the Dell stays as the work/MacBook monitor. The gaming monitor just needs DisplayPort for the PC. This opens up all the OLED options.
+- [ ] **IPS vs OLED?** Burn-in is a non-issue at my usage. The price gap is only ~$100-130. Main tradeoff: budget OLEDs have fewer ports and worse stands (solvable with a monitor arm). Need to decide if the image quality jump is worth it.
 - [ ] **Horizon Forbidden West at 1440p vs 4K:** How much visual difference is there? If 1440p looks good enough, it massively simplifies the GPU decision.
 - [ ] **Monitor arm vs stands:** Two monitors on stands takes up a lot of desk space. A dual monitor arm might be worth it.
