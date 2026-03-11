@@ -13,17 +13,17 @@ Case briefs and arguments on urban planning, land use, and walkability — built
 {: .fs-6 .fw-300 }
 
 <div class="topic-grid">
-  <a href="/library/urbanism/parking-subsidies/" class="topic-card">
+  <a href="/library/urbanism/parking-subsidies.html" class="topic-card">
     <span class="topic-icon">&#128663;</span>
     <span class="topic-title">Parking Subsidies</span>
     <span class="topic-desc">The hidden cost of free parking and minimum parking requirements</span>
   </a>
-  <a href="/library/urbanism/true-cost-of-cars/" class="topic-card">
+  <a href="/library/urbanism/true-cost-of-cars.html" class="topic-card">
     <span class="topic-icon">&#128664;</span>
     <span class="topic-title">True Cost of Cars</span>
     <span class="topic-desc">Personal, public, health, and climate costs of car dependency</span>
   </a>
-  <a href="/library/urbanism/threads/" class="topic-card">
+  <a href="/library/urbanism/threads.html" class="topic-card">
     <span class="topic-icon">&#129523;</span>
     <span class="topic-title">Threads to Explore</span>
     <span class="topic-desc">Loose ideas and rabbit holes not yet fully developed</span>
