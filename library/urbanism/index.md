@@ -1,31 +1,32 @@
 ---
 layout: default
-title: Library
-nav_order: 2
+title: Urbanism
+parent: Library
+nav_order: 3
 has_children: true
 has_toc: false
 ---
 
-# Library
+# Urbanism
 
-A collection of deep dives and notes on topics I'm studying.
+Case briefs and arguments on urban planning, land use, and walkability — built for community board participation and personal reference.
 {: .fs-6 .fw-300 }
 
 <div class="topic-grid">
-  <a href="/library/poker/" class="topic-card">
-    <span class="topic-icon">&#9824;</span>
-    <span class="topic-title">Poker</span>
-    <span class="topic-desc">PLO strategy, RFI ranges, session logs</span>
+  <a href="/library/urbanism/parking-subsidies/" class="topic-card">
+    <span class="topic-icon">&#128663;</span>
+    <span class="topic-title">Parking Subsidies</span>
+    <span class="topic-desc">The hidden cost of free parking and minimum parking requirements</span>
   </a>
-  <a href="/library/pc-builds/" class="topic-card">
-    <span class="topic-icon">&#128187;</span>
-    <span class="topic-title">PC Builds</span>
-    <span class="topic-desc">Monitors, GPUs, CPUs, and build planning</span>
+  <a href="/library/urbanism/true-cost-of-cars/" class="topic-card">
+    <span class="topic-icon">&#128664;</span>
+    <span class="topic-title">True Cost of Cars</span>
+    <span class="topic-desc">Personal, public, health, and climate costs of car dependency</span>
   </a>
-  <a href="/library/urbanism/" class="topic-card">
-    <span class="topic-icon">&#127961;</span>
-    <span class="topic-title">Urbanism</span>
-    <span class="topic-desc">Parking, land use, walkability, and community board arguments</span>
+  <a href="/library/urbanism/threads/" class="topic-card">
+    <span class="topic-icon">&#129523;</span>
+    <span class="topic-title">Threads to Explore</span>
+    <span class="topic-desc">Loose ideas and rabbit holes not yet fully developed</span>
   </a>
 </div>
 
