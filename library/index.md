@@ -22,6 +22,11 @@ A collection of deep dives and notes on topics I'm studying.
     <span class="topic-title">PC Builds</span>
     <span class="topic-desc">Monitors, GPUs, CPUs, and build planning</span>
   </a>
+  <a href="/library/league-of-legends/" class="topic-card">
+    <span class="topic-icon">⚔️</span>
+    <span class="topic-title">League of Legends</span>
+    <span class="topic-desc">Tools, notes, and references</span>
+  </a>
   <a href="/library/urbanism/" class="topic-card">
     <span class="topic-icon">&#127961;</span>
     <span class="topic-title">Urbanism</span>
