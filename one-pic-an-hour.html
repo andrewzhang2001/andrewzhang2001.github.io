@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>one pic an hour 📸</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #181818;
+    --accent: #f0e040;
+    --text: #f5f5f5;
+    --muted: #555;
+    --border: #2a2a2a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Mono', monospace; min-height: 100vh; display: flex; flex-direction: column; }
+
+  header { padding: 22px 32px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 14px; }
+  header h1 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.9rem; color: var(--accent); }
+  header span { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+
+  .layout { display: grid; grid-template-columns: 310px 1fr; flex: 1; }
+
+  .left { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+  .panel-label { padding: 12px 16px 8px; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .people-list { overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .person-row { display: flex; align-items: center; gap: 9px; padding: 8px 11px; background: var(--surface); border: 1px solid var(--border); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .person-name { font-size: 0.72rem; font-weight: 700; flex: 1; text-transform: capitalize; }
+  .person-count { font-size: 0.58rem; color: var(--muted); }
+
+  .timeline-panel { border-top: 1px solid var(--border); padding: 8px; display: flex; flex-direction: column; gap: 2px; max-height: 270px; overflow-y: auto; }
+  .time-btn { display: flex; align-items: center; gap: 8px; padding: 5px 9px; background: transparent; border: 1px solid transparent; color: var(--text); font-family: 'Space Mono', monospace; font-size: 0.62rem; cursor: pointer; text-align: left; transition: all 0.1s; }
+  .time-btn:hover { border-color: var(--border); background: var(--surface); }
+  .time-btn.sel { border-color: var(--accent); background: #1e1e00; color: var(--accent); }
+  .slot-dots { display: flex; gap: 3px; flex-wrap: wrap; flex: 1; }
+  .sdot { width: 6px; height: 6px; border-radius: 50%; }
+  .sdot.empty { background: var(--border); opacity: 0.35; }
+
+  .right { display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+  .right-header { padding: 12px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .time-label { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.4rem; color: var(--accent); flex: 1; }
+  .btn { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 6px 13px; font-family: 'Space Mono', monospace; font-size: 0.62rem; cursor: pointer; transition: all 0.1s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-yellow { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .btn-yellow:hover { background: #ffe800; color: #000; border-color: #ffe800; }
+  .btn-green { background: #0f1f0f; border-color: #4caf50; color: #4caf50; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .btn-green:hover { background: #4caf50; color: #000; }
+  .btn-blue { background: #0f1a2a; border-color: #6bcfff; color: #6bcfff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .btn-blue:hover { background: #6bcfff; color: #000; }
+
+  .upload-area { overflow-y: auto; padding: 20px; display: flex; align-items: center; justify-content: center; }
+  .grid-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; width: 100%; max-width: 660px; }
+
+  .cell { aspect-ratio: 9/16; position: relative; border: 1px solid var(--border); background: var(--surface); overflow: hidden; transition: border-color 0.15s; }
+  .cell:hover { border-color: var(--accent); }
+  .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cell-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 5px 6px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); font-size: 0.52rem; font-weight: 700; text-transform: capitalize; letter-spacing: 1px; }
+  .cell-clear { position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.75); border: 1px solid #333; color: #fff; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.58rem; cursor: pointer; opacity: 0; transition: opacity 0.1s; z-index: 5; }
+  .cell:hover .cell-clear { opacity: 1; }
+
+  .cell-empty-ui { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px; }
+  .cell-empty-name { font-size: 0.5rem; font-weight: 700; text-transform: capitalize; letter-spacing: 1px; margin-bottom: 2px; }
+  .cell-action-btn { width: 100%; padding: 5px 0; background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.5rem; cursor: pointer; text-align: center; transition: all 0.1s; letter-spacing: 0.5px; }
+  .cell-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .emoji-cell-display { width: 100%; height: 100%; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+  .emoji-big { font-size: 2.8rem; line-height: 1; }
+
+  .status-bar { border-top: 1px solid var(--border); padding: 9px 22px; display: flex; align-items: center; gap: 14px; font-size: 0.58rem; color: var(--muted); }
+  .status-pill { padding: 2px 8px; background: var(--surface); border: 1px solid var(--border); white-space: nowrap; }
+  .prog-bar { flex: 1; height: 2px; background: var(--border); }
+  .prog-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+
+  /* EMOJI MODAL */
+  .emoji-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 200; align-items: center; justify-content: center; }
+  .emoji-modal.open { display: flex; }
+  .emoji-box { background: var(--surface); border: 1px solid var(--border); padding: 28px 32px; width: 380px; display: flex; flex-direction: column; gap: 16px; }
+  .emoji-box h2 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.3rem; color: var(--accent); }
+  .emoji-input-row { display: flex; gap: 10px; align-items: center; }
+  .emoji-input { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; font-size: 1.6rem; width: 70px; text-align: center; outline: none; }
+  .emoji-input:focus { border-color: var(--accent); }
+  .emoji-hint { font-size: 0.6rem; color: var(--muted); flex: 1; line-height: 1.5; }
+  .emoji-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+  .emoji-preset { font-size: 1.4rem; cursor: pointer; padding: 4px 6px; border: 1px solid transparent; transition: border-color 0.1s; border-radius: 2px; }
+  .emoji-preset:hover { border-color: var(--accent); }
+  .emoji-modal-btns { display: flex; gap: 10px; }
+
+  /* EXPORT MODAL */
+  .export-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; }
+  .export-modal.open { display: flex; }
+  .export-box { background: var(--surface); border: 1px solid var(--border); padding: 32px 36px; width: 460px; display: flex; flex-direction: column; gap: 18px; }
+  .export-box h2 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.4rem; color: var(--accent); }
+  .export-sub { font-size: 0.62rem; color: var(--muted); line-height: 1.75; }
+  .export-prog { height: 3px; background: var(--border); }
+  .export-fill-bar { height: 100%; background: #4caf50; transition: width 0.15s; width: 0; }
+  .export-status { font-size: 0.62rem; color: var(--muted); }
+
+  /* PREVIEW MODAL */
+  .preview-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 150; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+  .preview-modal.open { display: flex; }
+  .preview-canvas-wrap { position: relative; box-shadow: 0 0 60px rgba(240,224,64,0.1); }
+  #previewCanvas { display: block; width: min(330px, 86vw); height: auto; }
+  .preview-hint { font-size: 0.52rem; color: #333; text-transform: uppercase; letter-spacing: 2px; }
+  .slide-controls { display: flex; align-items: center; gap: 12px; }
+  .slide-ctr { font-size: 0.62rem; color: var(--muted); min-width: 55px; text-align: center; }
+  .btn-autoplay { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
+  .btn-autoplay:hover { background: #ffe800; color: #000; }
+
+  input[type="file"] { display: none; }
+  canvas { display: none; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>one pic an hour</h1>
+  <span>story builder · 1080×1920 png export</span>
+</header>
+
+<div class="layout">
+  <div class="left">
+    <div class="panel-label">crew</div>
+    <div class="people-list" id="peopleList"></div>
+    <div class="panel-label" style="border-top:1px solid var(--border)">timeline</div>
+    <div class="timeline-panel" id="timelinePanel"></div>
+  </div>
+
+  <div class="right">
+    <div class="right-header">
+      <div class="time-label" id="timeLabel">midnight</div>
+      <button class="btn" onclick="changeSlot(-1)">← prev</button>
+      <button class="btn" onclick="changeSlot(1)">next →</button>
+      <button class="btn btn-yellow" onclick="openPreview()">▶ preview</button>
+      <button class="btn btn-blue" onclick="downloadCurrentSlide()" id="dlSlideBtn">↓ this slide</button>
+      <button class="btn btn-green" onclick="openExport()">↓ all (zip)</button>
+    </div>
+    <div class="upload-area"><div class="grid-3x3" id="uploadGrid"></div></div>
+    <div class="status-bar">
+      <span class="status-pill" id="slotStatus">0 / 9</span>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <span id="totalStatus">0 cells filled</span>
+    </div>
+  </div>
+</div>
+
+<!-- EMOJI MODAL -->
+<div class="emoji-modal" id="emojiModal">
+  <div class="emoji-box">
+    <h2>add emoji</h2>
+    <div class="emoji-input-row">
+      <input class="emoji-input" id="emojiInput" maxlength="4" placeholder="😊">
+      <div class="emoji-hint">Type or paste any emoji, or tap a preset below. Renders big and centered on a dark background.</div>
+    </div>
+    <div class="emoji-presets">
+      <span class="emoji-preset" onclick="setEmoji('😴')">😴</span>
+      <span class="emoji-preset" onclick="setEmoji('🚗')">🚗</span>
+      <span class="emoji-preset" onclick="setEmoji('🌙')">🌙</span>
+      <span class="emoji-preset" onclick="setEmoji('☀️')">☀️</span>
+      <span class="emoji-preset" onclick="setEmoji('🍕')">🍕</span>
+      <span class="emoji-preset" onclick="setEmoji('💻')">💻</span>
+      <span class="emoji-preset" onclick="setEmoji('🎮')">🎮</span>
+      <span class="emoji-preset" onclick="setEmoji('🏋️')">🏋️</span>
+      <span class="emoji-preset" onclick="setEmoji('🍜')">🍜</span>
+      <span class="emoji-preset" onclick="setEmoji('🎵')">🎵</span>
+      <span class="emoji-preset" onclick="setEmoji('🚇')">🚇</span>
+      <span class="emoji-preset" onclick="setEmoji('📱')">📱</span>
+      <span class="emoji-preset" onclick="setEmoji('🛌')">🛌</span>
+      <span class="emoji-preset" onclick="setEmoji('🏀')">🏀</span>
+      <span class="emoji-preset" onclick="setEmoji('🍺')">🍺</span>
+      <span class="emoji-preset" onclick="setEmoji('❓')">❓</span>
+      <span class="emoji-preset" onclick="setEmoji('😂')">😂</span>
+      <span class="emoji-preset" onclick="setEmoji('🔥')">🔥</span>
+      <span class="emoji-preset" onclick="setEmoji('💀')">💀</span>
+      <span class="emoji-preset" onclick="setEmoji('🫠')">🫠</span>
+    </div>
+    <div class="emoji-modal-btns">
+      <button class="btn btn-yellow" onclick="confirmEmoji()">confirm</button>
+      <button class="btn" onclick="closeEmojiModal()">cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="export-modal" id="exportModal">
+  <div class="export-box">
+    <h2>export slides</h2>
+    <div class="export-sub">
+      Renders all 25 time slots as <strong style="color:var(--text)">1080×1920 PNGs</strong> and downloads a ZIP.<br><br>
+      In CapCut: New Project → Photos → select all PNGs → set clip duration to 1–2s → add music → export.
+    </div>
+    <div class="export-prog"><div class="export-fill-bar" id="exportFill"></div></div>
+    <div class="export-status" id="exportStatus">ready</div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-green" id="exportBtn" onclick="runExport()">↓ download zip</button>
+      <button class="btn" onclick="closeExport()">cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="preview-modal" id="previewModal">
+  <div class="preview-canvas-wrap">
+    <button class="btn" style="position:absolute;top:-32px;right:0;font-size:0.56rem" onclick="closePreview()">✕ close</button>
+    <canvas id="previewCanvas" width="1080" height="1920"></canvas>
+  </div>
+  <div class="slide-controls">
+    <button class="btn" onclick="prevSlide()">← prev</button>
+    <span class="slide-ctr" id="slideCtr">1 / 25</span>
+    <button class="btn" onclick="nextSlide()">next →</button>
+    <button class="btn btn-autoplay" id="autoBtn" onclick="toggleAutoplay()">▶ autoplay</button>
+  </div>
+  <div class="preview-hint">← → keys also work</div>
+</div>
+
+<input type="file" id="fileInput" accept="image/*">
+<canvas id="exportCanvas"></canvas>
+
+<script>
+// Jacky is slot index 8. Name flips to "amit" at time index 20 (8:00 PM)
+const JACKY_AMIT_SPLIT = 20;
+
+const BASE_PEOPLE = [
+  { name: 'andrew',    color: '#f0e040' },
+  { name: 'anthony',  color: '#ff6b6b' },
+  { name: 'pranav',   color: '#6bcfff' },
+  { name: 'melat',    color: '#ff9f6b' },
+  { name: 'claire',   color: '#b06bff' },
+  { name: 'phillip',  color: '#6bffb0' },
+  { name: 'mio',      color: '#ff6bb0' },
+  { name: 'vinh',     color: '#6bddff' },
+  { name: 'jacky',    color: '#ffd06b' },
+];
+
+const TIMES = [
+  'midnight','1:00 AM','2:00 AM','3:00 AM','4:00 AM','5:00 AM',
+  '6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM',
+  'noon','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM',
+  '6:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM','11:00 PM',
+  'midnight'
+];
+
+function personName(pi, ti) {
+  if (pi === 8) return ti >= JACKY_AMIT_SPLIT ? 'amit' : 'jacky';
+  return BASE_PEOPLE[pi].name;
+}
+
+// cells[timeIdx][personIdx] = { type:'photo', dataURL, imgEl } | { type:'emoji', value } | null
+const cells = Array.from({length: TIMES.length}, () => Array(BASE_PEOPLE.length).fill(null));
+
+let currentSlot = 0;
+let pendingUpload = null;
+let pendingEmoji = null;
+let slideIdx = 0;
+let autoInterval = null;
+
+function buildPeople() {
+  const el = document.getElementById('peopleList');
+  el.innerHTML = '';
+  BASE_PEOPLE.forEach((p, i) => {
+    const count = cells.reduce((a, s) => a + (s[i] ? 1 : 0), 0);
+    const label = i === 8 ? 'jacky / amit' : p.name;
+    const row = document.createElement('div');
+    row.className = 'person-row';
+    row.innerHTML = `<div class="dot" style="background:${p.color}"></div>
+      <div class="person-name">${label}</div>
+      <div class="person-count">${count}/${TIMES.length}</div>`;
+    el.appendChild(row);
+  });
+}
+
+function buildTimeline() {
+  const el = document.getElementById('timelinePanel');
+  el.innerHTML = '';
+  TIMES.forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'time-btn' + (i === currentSlot ? ' sel' : '');
+    const dots = BASE_PEOPLE.map((p, pi) => {
+      const filled = !!cells[i][pi];
+      return `<div class="sdot${filled ? '' : ' empty'}" style="${filled ? 'background:'+p.color : ''}"></div>`;
+    }).join('');
+    btn.innerHTML = `<span style="min-width:66px">${t}</span><div class="slot-dots">${dots}</div>`;
+    btn.onclick = () => { currentSlot = i; refresh(); };
+    el.appendChild(btn);
+  });
+  el.querySelector('.sel')?.scrollIntoView({ block: 'nearest' });
+}
+
+function buildGrid() {
+  const grid = document.getElementById('uploadGrid');
+  grid.innerHTML = '';
+  BASE_PEOPLE.forEach((p, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    const d = cells[currentSlot][i];
+    const name = personName(i, currentSlot);
+
+    if (d?.type === 'photo') {
+      cell.innerHTML = `<img src="${d.dataURL}">
+        <div class="cell-label" style="color:${p.color}">${name}</div>
+        <div class="cell-clear" onclick="clearCell(${i},event)">✕</div>`;
+    } else if (d?.type === 'emoji') {
+      cell.innerHTML = `<div class="emoji-cell-display">
+          <div class="emoji-big">${d.value}</div>
+          <div style="font-size:0.48rem;color:${p.color};font-weight:700;text-transform:capitalize;letter-spacing:1px;margin-top:4px">${name}</div>
+        </div>
+        <div class="cell-clear" onclick="clearCell(${i},event)">✕</div>`;
+    } else {
+      cell.innerHTML = `<div class="cell-empty-ui">
+          <div class="cell-empty-name" style="color:${p.color}">${name}</div>
+          <button class="cell-action-btn" onclick="triggerUpload(${i})">+ photo</button>
+          <button class="cell-action-btn" onclick="triggerEmoji(${i})">+ emoji</button>
+        </div>`;
+    }
+    grid.appendChild(cell);
+  });
+
+  const count = cells[currentSlot].filter(Boolean).length;
+  const total = cells.flat().filter(Boolean).length;
+  document.getElementById('slotStatus').textContent = `${count} / ${BASE_PEOPLE.length}`;
+  document.getElementById('progFill').style.width = `${(count / BASE_PEOPLE.length) * 100}%`;
+  document.getElementById('totalStatus').textContent = `${total} cells filled`;
+}
+
+function refresh() {
+  document.getElementById('timeLabel').textContent = TIMES[currentSlot];
+  buildTimeline();
+  buildGrid();
+  buildPeople();
+}
+
+// UPLOAD
+function triggerUpload(pi) { pendingUpload = pi; document.getElementById('fileInput').click(); }
+document.getElementById('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file || pendingUpload === null) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      cells[currentSlot][pendingUpload] = { type: 'photo', dataURL: ev.target.result, imgEl: img };
+      pendingUpload = null;
+      refresh();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+function clearCell(pi, event) {
+  event.stopPropagation();
+  cells[currentSlot][pi] = null;
+  refresh();
+}
+
+// EMOJI
+function triggerEmoji(pi) {
+  pendingEmoji = pi;
+  document.getElementById('emojiInput').value = '';
+  document.getElementById('emojiModal').classList.add('open');
+  setTimeout(() => document.getElementById('emojiInput').focus(), 50);
+}
+function setEmoji(e) { document.getElementById('emojiInput').value = e; }
+function confirmEmoji() {
+  const val = document.getElementById('emojiInput').value.trim();
+  if (!val || pendingEmoji === null) { closeEmojiModal(); return; }
+  cells[currentSlot][pendingEmoji] = { type: 'emoji', value: val };
+  pendingEmoji = null;
+  closeEmojiModal();
+  refresh();
+}
+function closeEmojiModal() {
+  document.getElementById('emojiModal').classList.remove('open');
+  pendingEmoji = null;
+}
+
+// NAV
+function changeSlot(d) {
+  currentSlot = Math.max(0, Math.min(TIMES.length - 1, currentSlot + d));
+  refresh();
+}
+
+// PREVIEW — canvas-based, no DOM img tags (avoids sandbox security errors)
+const previewFontsReady = Promise.all([
+  document.fonts.load('italic 74px "Instrument Serif"'),
+  document.fonts.load('bold 32px "Space Mono"')
+]);
+
+async function drawPreviewSlide(ti) {
+  await previewFontsReady;
+  const canvas = document.getElementById('previewCanvas');
+  // reuse renderSlideToCanvas which draws to exportCanvas, then copy to previewCanvas
+  const exportCanvas = document.getElementById('exportCanvas');
+  await renderSlideToCanvas(ti);
+  canvas.width = exportCanvas.width;
+  canvas.height = exportCanvas.height;
+  canvas.getContext('2d').drawImage(exportCanvas, 0, 0);
+  document.getElementById('slideCtr').textContent = `${ti + 1} / ${TIMES.length}`;
+}
+
+async function openPreview() {
+  slideIdx = 0;
+  document.getElementById('previewModal').classList.add('open');
+  await drawPreviewSlide(slideIdx);
+}
+function closePreview() { stopAutoplay(); document.getElementById('previewModal').classList.remove('open'); }
+async function showSlide(i) {
+  slideIdx = Math.max(0, Math.min(TIMES.length - 1, i));
+  await drawPreviewSlide(slideIdx);
+}
+function prevSlide() { showSlide(slideIdx - 1); }
+function nextSlide() { showSlide(slideIdx + 1); }
+function stopAutoplay() {
+  if (autoInterval) { clearInterval(autoInterval); autoInterval = null; }
+  const btn = document.getElementById('autoBtn');
+  if (btn) btn.textContent = '▶ autoplay';
+}
+function toggleAutoplay() {
+  if (autoInterval) { stopAutoplay(); return; }
+  document.getElementById('autoBtn').textContent = '⏹ stop';
+  autoInterval = setInterval(() => showSlide(slideIdx >= TIMES.length - 1 ? 0 : slideIdx + 1), 1600);
+}
+
+// DOWNLOAD SINGLE SLIDE
+async function downloadCurrentSlide() {
+  const btn = document.getElementById('dlSlideBtn');
+  btn.textContent = 'rendering…'; btn.disabled = true;
+  await document.fonts.load('italic 74px "Instrument Serif"');
+  await document.fonts.load('bold 32px "Space Mono"');
+  await renderSlideToCanvas(currentSlot);
+  const canvas = document.getElementById('exportCanvas');
+  const b64url = canvas.toDataURL('image/png');
+  const a = document.createElement('a');
+  a.href = b64url;
+  const safeName = TIMES[currentSlot].replace(/[^a-z0-9]/gi, '_');
+  a.download = `slide_${String(currentSlot).padStart(2,'0')}_${safeName}.png`;
+  a.click();
+  btn.textContent = '↓ this slide'; btn.disabled = false;
+}
+
+async function renderSlideToCanvas(ti) {
+  const W = 1080, H = 1920;
+  const canvas = document.getElementById('exportCanvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  const GAP = 4;
+  const cols = 3, rows = 3;
+  const cellW = Math.floor((W - GAP * (cols - 1)) / cols);
+  const cellH = Math.floor((H - GAP * (rows - 1)) / rows);
+
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+
+  for (let pi = 0; pi < BASE_PEOPLE.length; pi++) {
+    const col = pi % cols;
+    const row = Math.floor(pi / cols);
+    const x = col * (cellW + GAP);
+    const y = row * (cellH + GAP);
+    const d = cells[ti][pi];
+    const p = BASE_PEOPLE[pi];
+    const name = personName(pi, ti).toUpperCase();
+
+    ctx.fillStyle = '#111111';
+    ctx.fillRect(x, y, cellW, cellH);
+
+    if (d?.type === 'photo') {
+      const img = d.imgEl;
+      const scale = Math.max(cellW / img.naturalWidth, cellH / img.naturalHeight);
+      const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+      const dx = x + (cellW - dw) / 2, dy = y + (cellH - dh) / 2;
+      ctx.save(); ctx.beginPath(); ctx.rect(x, y, cellW, cellH); ctx.clip();
+      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.restore();
+      const grad = ctx.createLinearGradient(x, y + cellH - 100, x, y + cellH);
+      grad.addColorStop(0, 'rgba(0,0,0,0)'); grad.addColorStop(1, 'rgba(0,0,0,0.88)');
+      ctx.fillStyle = grad; ctx.fillRect(x, y + cellH - 100, cellW, 100);
+      ctx.fillStyle = p.color; ctx.font = 'bold 30px "Space Mono"';
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(name, x + 16, y + cellH - 20);
+    } else if (d?.type === 'emoji') {
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(x, y, cellW, cellH);
+      ctx.font = `${Math.floor(cellH * 0.30)}px serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(d.value, x + cellW / 2, y + cellH / 2 - 24);
+      ctx.fillStyle = p.color; ctx.font = 'bold 28px "Space Mono"';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillText(name, x + cellW / 2, y + cellH - 28);
+    } else {
+      ctx.fillStyle = '#1a1a1a'; ctx.fillRect(x, y, cellW, cellH);
+      ctx.fillStyle = p.color + '25'; ctx.font = 'bold 26px "Space Mono"';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(name, x + cellW / 2, y + cellH / 2);
+    }
+  }
+
+  // time label
+  ctx.font = 'italic 74px "Instrument Serif"';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  const tw = ctx.measureText(TIMES[ti]).width;
+  const padX = 48, lh = 96, lw = tw + padX * 2;
+  const lx = (W - lw) / 2, ly = 32;
+  ctx.fillStyle = 'rgba(0,0,0,0.78)'; ctx.fillRect(lx, ly, lw, lh);
+  ctx.fillStyle = '#f0e040'; ctx.fillText(TIMES[ti], W / 2, ly + lh - 24);
+
+  await new Promise(r => setTimeout(r, 0));
+}
+
+// EXPORT
+function openExport() {
+  document.getElementById('exportFill').style.width = '0';
+  document.getElementById('exportStatus').textContent = 'ready';
+  document.getElementById('exportModal').classList.add('open');
+}
+function closeExport() { document.getElementById('exportModal').classList.remove('open'); }
+
+async function runExport() {
+  const btn = document.getElementById('exportBtn');
+  btn.disabled = true; btn.textContent = 'rendering…';
+  const fillEl = document.getElementById('exportFill');
+  const statusEl = document.getElementById('exportStatus');
+
+  await document.fonts.load('italic 74px "Instrument Serif"');
+  await document.fonts.load('bold 32px "Space Mono"');
+
+  const canvas = document.getElementById('exportCanvas');
+  const zip = new JSZip();
+
+  for (let ti = 0; ti < TIMES.length; ti++) {
+    statusEl.textContent = `rendering ${ti + 1} / ${TIMES.length} — ${TIMES[ti]}`;
+    fillEl.style.width = `${((ti + 1) / TIMES.length) * 100}%`;
+    await renderSlideToCanvas(ti);
+    const b64 = canvas.toDataURL('image/png').split(',')[1];
+    const pad = String(ti).padStart(2, '0');
+    zip.file(`slide_${pad}_${TIMES[ti].replace(/[^a-z0-9]/gi, '_')}.png`, b64, { base64: true });
+  }
+
+  statusEl.textContent = 'zipping…';
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'one_pic_an_hour.zip'; a.click();
+  URL.revokeObjectURL(url);
+
+  statusEl.textContent = '✓ done! check your downloads folder.';
+  btn.disabled = false; btn.textContent = '↓ download zip';
+}
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if (document.getElementById('previewModal').classList.contains('open')) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'Escape') closePreview();
+  }
+  if (document.getElementById('emojiModal').classList.contains('open') && e.key === 'Enter') confirmEmoji();
+  if (document.getElementById('emojiModal').classList.contains('open') && e.key === 'Escape') closeEmojiModal();
+});
+
+refresh();
+</script>
+</body>
+</html>
