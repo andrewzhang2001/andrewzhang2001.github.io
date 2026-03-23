@@ -37,6 +37,11 @@ A collection of deep dives and notes on topics I'm studying.
     <span class="topic-title">Basketball</span>
     <span class="topic-desc">Shooting form, drills, and pickup notes</span>
   </a>
+  <a href="/library/perfume/" class="topic-card">
+    <span class="topic-icon">&#128167;</span>
+    <span class="topic-title">Perfume</span>
+    <span class="topic-desc">Fragrances, scent families, and first impressions</span>
+  </a>
 </div>
 
 <style>
