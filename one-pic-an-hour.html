@@ -114,6 +114,26 @@
   canvas { display: none; }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
+
+  @media (max-width: 768px) {
+    .left { display: none; }
+    .layout { grid-template-columns: 1fr; }
+
+    header { padding: 14px 16px 10px; }
+    header h1 { font-size: 1.4rem; }
+
+    .right-header { padding: 10px 14px; gap: 6px; }
+    .btn { padding: 5px 9px; font-size: 0.56rem; }
+
+    .upload-area { padding: 10px; }
+
+    .cell-clear { opacity: 1; }
+
+    .emoji-box { width: calc(100vw - 32px); max-width: 380px; padding: 22px 20px; }
+    .export-box { width: calc(100vw - 32px); max-width: 460px; padding: 24px 20px; }
+
+    .status-bar { padding: 8px 14px; gap: 10px; }
+  }
 </style>
 </head>
 <body>
