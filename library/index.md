@@ -32,6 +32,11 @@ A collection of deep dives and notes on topics I'm studying.
     <span class="topic-title">Urbanism</span>
     <span class="topic-desc">Parking, land use, walkability, and community board arguments</span>
   </a>
+  <a href="/library/basketball/" class="topic-card">
+    <span class="topic-icon">&#127936;</span>
+    <span class="topic-title">Basketball</span>
+    <span class="topic-desc">Shooting form, drills, and pickup notes</span>
+  </a>
 </div>
 
 <style>
