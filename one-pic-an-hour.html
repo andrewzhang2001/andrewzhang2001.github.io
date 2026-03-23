@@ -191,7 +191,8 @@
   <div class="export-box">
     <h2>export slides</h2>
     <div class="export-sub">
-      Renders all 25 time slots as <strong style="color:var(--text)">1080×1920 PNGs</strong> and downloads a ZIP.<br><br>
+      Renders all 25 time slots as <strong style="color:var(--text)">1080×1920 PNGs</strong>.<br>
+      On iPhone: saves to Photos via share sheet. On desktop: downloads a ZIP.<br><br>
       In CapCut: New Project → Photos → select all PNGs → set clip duration to 1–2s → add music → export.
     </div>
     <div class="export-prog"><div class="export-fill-bar" id="exportFill"></div></div>
@@ -427,6 +428,15 @@ function toggleAutoplay() {
   autoInterval = setInterval(() => showSlide(slideIdx >= TIMES.length - 1 ? 0 : slideIdx + 1), 1600);
 }
 
+// HELPERS: canvas → blob/file
+function canvasToBlob(canvas) {
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+}
+
+function canShareFiles(files) {
+  return navigator.canShare && navigator.canShare({ files });
+}
+
 // DOWNLOAD SINGLE SLIDE
 async function downloadCurrentSlide() {
   const btn = document.getElementById('dlSlideBtn');
@@ -435,12 +445,21 @@ async function downloadCurrentSlide() {
   await document.fonts.load('bold 32px "Space Mono"');
   await renderSlideToCanvas(currentSlot);
   const canvas = document.getElementById('exportCanvas');
-  const b64url = canvas.toDataURL('image/png');
-  const a = document.createElement('a');
-  a.href = b64url;
   const safeName = TIMES[currentSlot].replace(/[^a-z0-9]/gi, '_');
-  a.download = `slide_${String(currentSlot).padStart(2,'0')}_${safeName}.png`;
-  a.click();
+  const fileName = `slide_${String(currentSlot).padStart(2,'0')}_${safeName}.png`;
+
+  const blob = await canvasToBlob(canvas);
+  const file = new File([blob], fileName, { type: 'image/png' });
+
+  if (canShareFiles([file])) {
+    try { await navigator.share({ files: [file] }); }
+    catch (e) { if (e.name !== 'AbortError') console.warn('Share failed:', e); }
+  } else {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+  }
   btn.textContent = '↓ this slide'; btn.disabled = false;
 }
 
@@ -529,26 +548,51 @@ async function runExport() {
   await document.fonts.load('bold 32px "Space Mono"');
 
   const canvas = document.getElementById('exportCanvas');
-  const zip = new JSZip();
+  const files = [];
 
   for (let ti = 0; ti < TIMES.length; ti++) {
     statusEl.textContent = `rendering ${ti + 1} / ${TIMES.length} — ${TIMES[ti]}`;
     fillEl.style.width = `${((ti + 1) / TIMES.length) * 100}%`;
     await renderSlideToCanvas(ti);
-    const b64 = canvas.toDataURL('image/png').split(',')[1];
+    const blob = await canvasToBlob(canvas);
     const pad = String(ti).padStart(2, '0');
-    zip.file(`slide_${pad}_${TIMES[ti].replace(/[^a-z0-9]/gi, '_')}.png`, b64, { base64: true });
+    const name = `slide_${pad}_${TIMES[ti].replace(/[^a-z0-9]/gi, '_')}.png`;
+    files.push(new File([blob], name, { type: 'image/png' }));
   }
 
+  // Try Web Share API (iOS Safari) first, fall back to JSZip download
+  if (canShareFiles(files)) {
+    statusEl.textContent = 'opening share sheet…';
+    try {
+      await navigator.share({ files });
+      statusEl.textContent = '✓ done! save from the share sheet.';
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        statusEl.textContent = 'share cancelled.';
+      } else {
+        console.warn('Share failed, falling back to ZIP:', e);
+        await zipAndDownload(files, statusEl);
+      }
+    }
+  } else {
+    await zipAndDownload(files, statusEl);
+  }
+
+  btn.disabled = false; btn.textContent = '↓ download zip';
+}
+
+async function zipAndDownload(files, statusEl) {
   statusEl.textContent = 'zipping…';
+  const zip = new JSZip();
+  for (const f of files) {
+    zip.file(f.name, await f.arrayBuffer());
+  }
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'one_pic_an_hour.zip'; a.click();
   URL.revokeObjectURL(url);
-
   statusEl.textContent = '✓ done! check your downloads folder.';
-  btn.disabled = false; btn.textContent = '↓ download zip';
 }
 
 // keyboard
