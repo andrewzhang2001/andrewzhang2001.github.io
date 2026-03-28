@@ -23,6 +23,21 @@ Case briefs and arguments on urban planning, land use, and walkability — built
     <span class="topic-title">True Cost of Cars</span>
     <span class="topic-desc">Personal, public, health, and climate costs of car dependency</span>
   </a>
+  <a href="/library/urbanism/plan-voisin.html" class="topic-card">
+    <span class="topic-icon">&#127970;</span>
+    <span class="topic-title">Plan Voisin</span>
+    <span class="topic-desc">Le Corbusier's Radiant City and the tower-in-the-park legacy</span>
+  </a>
+  <a href="/library/urbanism/mit-11301-readings.html" class="topic-card">
+    <span class="topic-icon">&#127979;</span>
+    <span class="topic-title">MIT 11.301J Readings</span>
+    <span class="topic-desc">Full reading list for Introduction to Urban Design and Development</span>
+  </a>
+  <a href="/library/urbanism/readings.html" class="topic-card">
+    <span class="topic-icon">&#128218;</span>
+    <span class="topic-title">Reading Notes</span>
+    <span class="topic-desc">Notes from MIT 11.301 Urban Design OCW texts</span>
+  </a>
   <a href="/library/urbanism/threads.html" class="topic-card">
     <span class="topic-icon">&#129523;</span>
     <span class="topic-title">Threads to Explore</span>
