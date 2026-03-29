@@ -22,6 +22,11 @@ Things I want to do, try, see, or experience — not urgent, not a todo list, ju
     <span class="topic-title">Travel</span>
     <span class="topic-desc">Places to go, trips to plan</span>
   </a>
+  <a href="/lists/reading-list.html" class="topic-card">
+    <span class="topic-icon">&#128216;</span>
+    <span class="topic-title">Reading List</span>
+    <span class="topic-desc">Books to read</span>
+  </a>
 </div>
 
 <style>
