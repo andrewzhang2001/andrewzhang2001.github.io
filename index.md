@@ -19,6 +19,11 @@ nav_order: 1
     <span class="home-title">Bucket List</span>
     <span class="home-desc">Things I want to do, see, and experience</span>
   </a>
+  <a href="/one-pic-an-hour.html" class="home-card">
+    <span class="home-icon">&#128247;</span>
+    <span class="home-title">One Pic an Hour</span>
+    <span class="home-desc">Story builder from hourly photos</span>
+  </a>
 </div>
 
 <style>
