@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Lists
+title: Bucket List
 nav_order: 3
 has_children: true
 has_toc: false
 ---
 
-# Lists
+# Bucket List
 
 Things I want to do, try, see, or experience — not urgent, not a todo list, just a running collection of ideas worth keeping.
 {: .fs-6 .fw-300 }
@@ -15,7 +15,7 @@ Things I want to do, try, see, or experience — not urgent, not a todo list, ju
   <a href="/lists/experiences.html" class="topic-card">
     <span class="topic-icon">&#127775;</span>
     <span class="topic-title">Experiences</span>
-    <span class="topic-desc">Restaurants, music, hobbies, one-off things to try</span>
+    <span class="topic-desc">Music, hobbies, one-off things to try</span>
   </a>
   <a href="/lists/travel.html" class="topic-card">
     <span class="topic-icon">&#9992;</span>

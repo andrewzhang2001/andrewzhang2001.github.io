@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Experiences
-parent: Lists
+parent: Bucket List
 ---
 
 # Experiences

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Travel
-parent: Lists
+parent: Bucket List
 ---
 
 # Travel
@@ -11,4 +11,7 @@ Places to go.
 
 ---
 
-*To be filled in.*
+- Iceland
+- New Orleans
+- The Great Smoky Mountains
+- Vancouver
