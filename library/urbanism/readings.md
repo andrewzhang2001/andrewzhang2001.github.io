@@ -40,4 +40,6 @@ The Haussmann boulevard is essentially the opposite of the Plan Voisin model: ra
 
 ---
 
+---
+
 *WIP — more notes to be added.*
