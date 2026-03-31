@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Trolleys
-parent: Walkable City
+parent: Public Transit
 grand_parent: Urbanism
 ---
 
@@ -29,3 +29,9 @@ Streetcars are **pedestrian accelerators, not pedestrian creators**. They don't 
 **Funding model:** Private parties who stand to benefit from increased land value and connectivity along a streetcar line should want to help pay for it. In Seattle, Paul Allen contributed fully half the cost of a new $52 million trolley line connecting his property to downtown — the remainder came from federal/state sources and proceeds from selling surplus property along the route. This public-private model aligns incentives: developers get the transit-driven appreciation, and taxpayers don't foot the entire bill.
 
 **Takeaway:** Trolleys, unless integrated into a robust citywide transit network, are first and foremost a tool for creating new urban districts — not a street-enlivening walkability bomb.
+
+---
+
+## Sources
+
+- Speck, Jeff. *Walkable City: How Downtown Can Save America, One Step at a Time.* North Point Press, 2012.

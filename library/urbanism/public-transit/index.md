@@ -1,33 +1,32 @@
 ---
 layout: default
-title: Walkable City
+title: Public Transit
 parent: Urbanism
 has_children: true
 has_toc: false
 ---
 
-# Walkable City
+# Public Transit
 
-Notes and quotes from *Walkable City* by Jeff Speck (2012).
 {: .fs-6 .fw-300 }
 
 <div class="topic-grid">
-  <a href="/library/urbanism/walkable-city/transit.html" class="topic-card">
+  <a href="/library/urbanism/public-transit/transit.html" class="topic-card">
     <span class="topic-icon">&#128649;</span>
-    <span class="topic-title">Transit</span>
+    <span class="topic-title">Transit & Walking</span>
     <span class="topic-desc">Public sentiment, funding gaps, and the case for investment</span>
   </a>
-  <a href="/library/urbanism/walkable-city/dallas-dart.html" class="topic-card">
+  <a href="/library/urbanism/public-transit/dallas-dart.html" class="topic-card">
     <span class="topic-icon">&#128683;</span>
     <span class="topic-title">Dallas DART</span>
-    <span class="topic-desc">Why a $52B light-rail system failed to reduce congestion</span>
+    <span class="topic-desc">Why a massive light-rail system failed to reduce congestion</span>
   </a>
-  <a href="/library/urbanism/walkable-city/trolleys.html" class="topic-card">
+  <a href="/library/urbanism/public-transit/trolleys.html" class="topic-card">
     <span class="topic-icon">&#128643;</span>
     <span class="topic-title">Trolleys</span>
     <span class="topic-desc">Streetcars, gondolas, and when smaller transit works</span>
   </a>
-  <a href="/library/urbanism/walkable-city/buses.html" class="topic-card">
+  <a href="/library/urbanism/public-transit/buses.html" class="topic-card">
     <span class="topic-icon">&#128652;</span>
     <span class="topic-title">Buses</span>
     <span class="topic-desc">Reconceptualizing the loser cruiser</span>
@@ -41,7 +40,6 @@ Notes and quotes from *Walkable City* by Jeff Speck (2012).
   gap: 1rem;
   margin-top: 1.5rem;
 }
-
 .topic-card {
   display: flex;
   flex-direction: column;
@@ -56,26 +54,12 @@ Notes and quotes from *Walkable City* by Jeff Speck (2012).
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   text-align: center;
 }
-
 .topic-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   border-color: var(--link-color, #7253ed);
 }
-
-.topic-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.topic-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-}
-
-.topic-desc {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  margin-top: 0.25rem;
-}
+.topic-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.topic-title { font-size: 1.15rem; font-weight: 600; }
+.topic-desc { font-size: 0.8rem; opacity: 0.7; margin-top: 0.25rem; }
 </style>

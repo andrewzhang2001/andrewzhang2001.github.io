@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Buses
-parent: Walkable City
+parent: Public Transit
 grand_parent: Urbanism
 ---
 
@@ -20,3 +20,9 @@ For buses to become widely adopted, they need to be **ruthlessly reconceptualize
 **Frequency** — People don't want to check schedules or wait. Provide service frequently or not at all. Cutting service due to low ridership is a death spiral few transit lines survive — low frequency drives away riders, which justifies further cuts.
 
 **Pleasure** — The bus needs to feel good to ride. Big untinted windows that open wide, WiFi, double-decker buses. Give them some personality. If the experience is miserable, choice riders won't show up.
+
+---
+
+## Sources
+
+- Speck, Jeff. *Walkable City: How Downtown Can Save America, One Step at a Time.* North Point Press, 2012.

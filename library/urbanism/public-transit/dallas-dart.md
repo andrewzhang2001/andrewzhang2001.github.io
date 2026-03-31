@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Dallas DART
-parent: Walkable City
+parent: Public Transit
 grand_parent: Urbanism
 ---
 
@@ -42,3 +42,9 @@ Civic leaders resist this because making driving inconvenient or expensive is po
 - Eliminate on-site parking requirements near all stations
 - Prohibit new parking lots near stations
 - ... and wait for gasoline to hit ten dollars a gallon (lol)
+
+---
+
+## Sources
+
+- Speck, Jeff. *Walkable City: How Downtown Can Save America, One Step at a Time.* North Point Press, 2012.

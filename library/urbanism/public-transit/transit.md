@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Transit
-parent: Walkable City
+title: Transit & Walking
+parent: Public Transit
 grand_parent: Urbanism
 ---
 
-# Transit
+# Transit & Walking
 
 ---
 
-## Transit and Walking
+## Transit and Walking Are Complementary
 
 When more than 25% of workers take transit, more than 10% commute on foot. When fewer than 5% take transit, fewer than 3% walk. This holds for non-transit users too — people in transit-oriented cities walk more regardless of whether they personally ride. Cities either organize themselves around driving or around everything else.
 
@@ -38,3 +38,9 @@ Todd Litman compared the 50 largest US cities. In the 7 cities with high-quality
 ## Case Study: Orange Line, Northern Virginia
 
 The areas immediately around the five Orange Line Metro stops — less than **6% of the county's land area** — saw **70% population growth**. Today, **40% of residents in those blocks** use transit to get to work. Concentrated transit investment pulls density and ridership toward it; the two build on each other.
+
+---
+
+## Sources
+
+- Speck, Jeff. *Walkable City: How Downtown Can Save America, One Step at a Time.* North Point Press, 2012.

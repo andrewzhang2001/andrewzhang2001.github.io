@@ -23,10 +23,10 @@ Case briefs and arguments on urban planning, land use, and walkability — built
     <span class="topic-title">True Cost of Cars</span>
     <span class="topic-desc">Personal, public, health, and climate costs of car dependency</span>
   </a>
-  <a href="/library/urbanism/walkable-city.html" class="topic-card">
-    <span class="topic-icon">&#128694;</span>
-    <span class="topic-title">Walkable City</span>
-    <span class="topic-desc">Notes from Jeff Speck's Walkable City</span>
+  <a href="/library/urbanism/public-transit/" class="topic-card">
+    <span class="topic-icon">&#128649;</span>
+    <span class="topic-title">Public Transit</span>
+    <span class="topic-desc">Transit, DART, trolleys, buses</span>
   </a>
   <a href="/library/urbanism/plan-voisin.html" class="topic-card">
     <span class="topic-icon">&#127970;</span>
